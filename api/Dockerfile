@@ -9,9 +9,10 @@ RUN mvn -q -B package -DskipTests
 # Ejecución
 FROM docker.io/library/eclipse-temurin:21-jre
 WORKDIR /app
-RUN useradd --system --create-home mesaya
+RUN useradd --system --create-home mesaya && mkdir -p /app/data && chown mesaya /app/data
 COPY --from=build /app/target/mesaya-0.0.1-SNAPSHOT.jar app.jar
 USER mesaya
-ENV JAVA_OPTS="-XX:MaxRAMPercentage=75"
+ENV JAVA_OPTS="-XX:MaxRAMPercentage=75" \
+    DB_URL="jdbc:sqlite:/app/data/mesaya.db?foreign_keys=true"
 EXPOSE 9000
 ENTRYPOINT ["sh", "-c", "exec java $JAVA_OPTS -jar app.jar"]
