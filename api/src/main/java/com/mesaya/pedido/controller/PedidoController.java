@@ -8,6 +8,8 @@ import com.mesaya.pedido.service.interfaz.IPedidoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -33,8 +35,11 @@ public class PedidoController {
 
 	// POST /api/pedidos
 	@PostMapping
-	public ResponseEntity<PedidoResponseDTO> crear(@Valid @RequestBody PedidoRequestDTO dto) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(pedidoService.crear(dto));
+	public ResponseEntity<PedidoResponseDTO> crear(@Valid @RequestBody PedidoRequestDTO dto,
+			@AuthenticationPrincipal Jwt jwt) {
+		// El usuario que crea el pedido sale del token, no del cuerpo de la petición.
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(pedidoService.crear(dto, Long.valueOf(jwt.getSubject())));
 	}
 
 	// DELETE /api/pedidos/{id}

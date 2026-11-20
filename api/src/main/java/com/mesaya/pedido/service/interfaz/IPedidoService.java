@@ -9,7 +9,7 @@ import java.util.List;
 public interface IPedidoService {
 	List<PedidoResponseDTO> listar(EstadoPedido estado);
 	PedidoResponseDTO obtenerPorId(Long id);
-	PedidoResponseDTO crear(PedidoRequestDTO dto);
+	PedidoResponseDTO crear(PedidoRequestDTO dto, Long idUsuario);
 	void eliminar(Long id);
 	PedidoResponseDTO avanzarEstado(Long id);
 	PedidoResponseDTO agregarDetalle(Long idPedido, AgregarDetalleRequestDTO dto);

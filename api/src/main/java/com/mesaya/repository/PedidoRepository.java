@@ -11,7 +11,13 @@ import java.util.List;
 
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
-	List<Pedido> findByEstado(EstadoPedido estado);
+	List<Pedido> findByEstadoOrderByFechaCreacionDesc(EstadoPedido estado);
+
+	List<Pedido> findAllByOrderByFechaCreacionDesc();
+
+	boolean existsByMesaIdMesa(Long idMesa);
+
+	boolean existsByClienteIdCliente(Long idCliente);
 	long countByEstadoIn(List<EstadoPedido> estados);
 	boolean existsByMesaIdMesaAndEstadoIn(Long idMesa, List<EstadoPedido> estados);
 

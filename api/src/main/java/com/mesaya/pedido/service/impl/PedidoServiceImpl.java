@@ -31,8 +31,8 @@ public class PedidoServiceImpl implements IPedidoService {
 	@Transactional(readOnly = true)
 	public List<PedidoResponseDTO> listar(EstadoPedido estado) {
 		List<Pedido> lista = (estado != null)
-				? pedidoRepository.findByEstado(estado)
-				: pedidoRepository.findAll();
+				? pedidoRepository.findByEstadoOrderByFechaCreacionDesc(estado)
+				: pedidoRepository.findAllByOrderByFechaCreacionDesc();
 		return lista.stream().map(this::toDTO).collect(Collectors.toList());
 	}
 
@@ -44,15 +44,15 @@ public class PedidoServiceImpl implements IPedidoService {
 
 	@Override
 	@Transactional
-	public PedidoResponseDTO crear(PedidoRequestDTO dto) {
+	public PedidoResponseDTO crear(PedidoRequestDTO dto, Long idUsuario) {
 		Mesa mesa = mesaRepository.findById(dto.getIdMesa())
 				.orElseThrow(() -> new ResourceNotFoundException("Mesa no encontrada: " + dto.getIdMesa()));
 
 		if (mesa.getEstado() == EstadoMesa.OCUPADA)
 			throw new BusinessException("La mesa " + mesa.getNumero() + " ya está ocupada.");
 
-		Usuario usuario = usuarioRepository.findById(dto.getIdUsuario())
-				.orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado: " + dto.getIdUsuario()));
+		Usuario usuario = usuarioRepository.findById(idUsuario)
+				.orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado: " + idUsuario));
 
 		Cliente cliente = null;
 		if (dto.getIdCliente() != null) {
@@ -119,6 +119,8 @@ public class PedidoServiceImpl implements IPedidoService {
 	@Transactional
 	public PedidoResponseDTO agregarDetalle(Long idPedido, AgregarDetalleRequestDTO dto) {
 		Pedido pedido = buscar(idPedido);
+		if (pedido.getEstado() == EstadoPedido.ENTREGADA)
+			throw new BusinessException("No se pueden agregar productos a un pedido entregado.");
 		Producto producto = productoRepository.findById(dto.getIdProducto())
 				.orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado: " + dto.getIdProducto()));
 		if (!producto.getDisponible())
@@ -142,8 +144,13 @@ public class PedidoServiceImpl implements IPedidoService {
 		if (pedido.getEstado() != EstadoPedido.CREADA)
 			throw new BusinessException("Solo se pueden quitar ítems de pedidos en estado CREADA.");
 
-		DetallePedido detalle = detallePedidoRepository.findById(idDetalle)
+		// Se busca dentro del mismo pedido para no poder borrar ítems de otro pedido.
+		DetallePedido detalle = pedido.getDetalles().stream()
+				.filter(d -> d.getIdDetalle().equals(idDetalle))
+				.findFirst()
 				.orElseThrow(() -> new ResourceNotFoundException("Detalle no encontrado: " + idDetalle));
+		if (pedido.getDetalles().size() == 1)
+			throw new BusinessException("El pedido debe tener al menos un producto. Si ya no lo necesitas, elimínalo.");
 
 		pedido.getDetalles().remove(detalle);
 		return toDTO(pedidoRepository.save(pedido));

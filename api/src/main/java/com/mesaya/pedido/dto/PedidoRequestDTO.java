@@ -11,8 +11,6 @@ public class PedidoRequestDTO {
 
 	private Long idCliente;   // opcional
 
-	@NotNull(message = "El usuario es obligatorio")
-	private Long idUsuario;
 
 	private String observaciones;
 
