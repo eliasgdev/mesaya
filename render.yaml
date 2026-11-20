@@ -1,0 +1,17 @@
+# Blueprint de Render: crea la API como servicio Docker gratuito.
+# Render > New > Blueprint > elegir este repositorio.
+services:
+  - type: web
+    name: mesaya-api
+    runtime: docker
+    plan: free
+    rootDir: api
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: https://eliasgdev.github.io
+      - key: DEMO_DATOS
+        value: "true"
