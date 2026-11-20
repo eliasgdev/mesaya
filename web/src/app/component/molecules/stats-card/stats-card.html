@@ -1,11 +1,7 @@
-<div class="stats-card">
-
-  <h3 class="stats-card__title">
-    {{ title }}
-  </h3>
-
-  <p class="stats-card__value">
-    {{ value }}
-  </p>
-
-</div>
+<a class="stats-card" [routerLink]="link()">
+  <span class="stats-card__title">{{ title() }}</span>
+  <span class="stats-card__value">{{ value() ?? '—' }}</span>
+  @if (hint()) {
+    <span class="stats-card__hint">{{ hint() }}</span>
+  }
+</a>

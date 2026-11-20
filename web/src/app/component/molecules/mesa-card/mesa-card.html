@@ -1,11 +1,9 @@
-<div class="mesa-card">
-
-  <h3 class="mesa-card__title">
-    Mesa {{ number }}
-  </h3>
-
-  <app-badge-status
-    [status]="status"
-  />
-
-</div>
+<article [class]="'mesa-card mesa-card--' + mesa().estado.toLowerCase()">
+  <div class="mesa-card__top">
+    <h3 class="mesa-card__title">Mesa {{ mesa().numero }}</h3>
+    <app-table-actions [nombre]="'mesa ' + mesa().numero" [puedeEliminar]="mesa().estado !== 'OCUPADA'"
+                       (editar)="editar.emit()" (eliminar)="eliminar.emit()" />
+  </div>
+  <p class="mesa-card__capacidad">{{ mesa().capacidad }} {{ mesa().capacidad === 1 ? 'persona' : 'personas' }}</p>
+  <app-badge-status [status]="mesa().estado" />
+</article>

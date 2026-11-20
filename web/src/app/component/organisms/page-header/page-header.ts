@@ -1,4 +1,8 @@
-import { Component, Input } from '@angular/core';
+// =====================================
+// ORGANISM — PAGE HEADER
+// =====================================
+
+import { Component, input, output } from '@angular/core';
 
 import { ButtonComponent } from '../../atoms/button/button';
 
@@ -7,12 +11,11 @@ import { ButtonComponent } from '../../atoms/button/button';
   standalone: true,
   imports: [ButtonComponent],
   templateUrl: './page-header.html',
-  styleUrl: './page-header.css'
+  styleUrl: './page-header.css',
 })
 export class PageHeaderComponent {
-
-  @Input() title = '';
-
-  @Input() buttonText = '';
-
+  readonly title = input('');
+  readonly subtitle = input('');
+  readonly buttonText = input('');
+  readonly accion = output<void>();
 }

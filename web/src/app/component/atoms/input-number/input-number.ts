@@ -1,19 +1,28 @@
-import { Component, Input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+// =====================================
+// ATOM — INPUT NUMBER
+// =====================================
+
+import { Component, input, model } from '@angular/core';
+
+let siguienteId = 0;
 
 @Component({
   selector: 'app-input-number',
   standalone: true,
-  imports: [FormsModule],
   templateUrl: './input-number.html',
-  styleUrl: './input-number.css'
+  styleUrl: './input-number.css',
 })
 export class InputNumberComponent {
+  readonly label = input('');
+  readonly placeholder = input('');
+  readonly min = input<number | null>(0);
+  readonly step = input(1);
+  readonly required = input(false);
+  readonly value = model<number | null>(null);
+  readonly id = `numero-${++siguienteId}`;
 
-  @Input() label = '';
-
-  @Input() placeholder = '';
-
-  value = 0;
-
+  actualizar(evento: Event): void {
+    const texto = (evento.target as HTMLInputElement).value;
+    this.value.set(texto === '' ? null : Number(texto));
+  }
 }

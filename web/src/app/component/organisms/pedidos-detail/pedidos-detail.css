@@ -1,15 +1,7 @@
-.pedidos-detail {
-  background: white;
-  padding: 24px;
-  border-radius: 16px;
-}
-
-.pedidos-detail__title {
-  margin-bottom: 20px;
-}
-
-.pedidos-detail__items {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+.pedidos-detail { background: white; border-radius: 16px; padding: 24px; }
+.pedidos-detail__header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 8px; }
+.pedidos-detail__title { margin: 0 0 6px; font-size: 22px; }
+.pedidos-detail__meta { margin: 0 0 2px; color: var(--color-texto-suave); font-size: 14px; }
+.pedidos-detail__obs { margin: 12px 0 0; font-size: 14px; }
+.pedidos-detail__items { margin-top: 8px; }
+.pedidos-detail__total { display: flex; justify-content: space-between; margin: 16px 0 0; font-size: 18px; }

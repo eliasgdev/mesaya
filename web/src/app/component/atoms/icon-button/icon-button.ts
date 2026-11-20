@@ -1,22 +1,20 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// =====================================
+// ATOM — ICON BUTTON
+// =====================================
+
+import { Component, input } from '@angular/core';
+
+export type Icono = 'editar' | 'eliminar' | 'buscar' | 'ver' | 'salir' | 'mas' | 'menos';
 
 @Component({
   selector: 'app-icon-button',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './icon-button.html',
-  styleUrl: './icon-button.css'
+  styleUrl: './icon-button.css',
 })
 export class IconButtonComponent {
-
-  @Input() icon = '';
-
-  @Input() type:
-    | 'primary'
-    | 'danger'
-    | 'success'
-    | 'secondary'
-  = 'primary';
-
+  readonly icon = input.required<Icono>();
+  readonly label = input.required<string>();
+  readonly type = input<'primary' | 'danger' | 'success' | 'secondary'>('secondary');
+  readonly disabled = input(false);
 }

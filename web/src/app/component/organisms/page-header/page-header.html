@@ -1,12 +1,9 @@
 <div class="page-header">
-
-  <h1 class="page-header__title">
-    {{ title }}
-  </h1>
-
-  <app-button
-    [text]="buttonText"
-    type="primary"
-  />
-
+  <div>
+    <h2 class="page-header__title">{{ title() }}</h2>
+    @if (subtitle()) { <p class="page-header__subtitle">{{ subtitle() }}</p> }
+  </div>
+  @if (buttonText()) {
+    <app-button [text]="buttonText()" (click)="accion.emit()" />
+  }
 </div>

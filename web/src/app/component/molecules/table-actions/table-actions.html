@@ -1,12 +1,8 @@
 <div class="table-actions">
-
-  <app-icon-button
-
-    type="secondary"
-  />
-
-  <app-icon-button
-    type="danger"
-  />
-
+  @if (puedeEditar()) {
+    <app-icon-button icon="editar" [label]="'Editar ' + nombre()" (click)="editar.emit()" />
+  }
+  @if (puedeEliminar()) {
+    <app-icon-button icon="eliminar" type="danger" [label]="'Eliminar ' + nombre()" (click)="eliminar.emit()" />
+  }
 </div>

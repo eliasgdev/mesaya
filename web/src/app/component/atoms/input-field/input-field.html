@@ -1,14 +1,17 @@
 <div class="input-field">
-
-  <label class="input-field__label">
-    {{ label }}
-  </label>
-
+  @if (label()) {
+    <label class="input-field__label" [for]="id">{{ label() }}</label>
+  }
   <input
     class="input-field__input"
-    [type]="type"
-    [placeholder]="placeholder"
-    [(ngModel)]="value"
+    [id]="id"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [autocomplete]="autocomplete()"
+    [required]="required()"
+    [attr.maxlength]="maxlength()"
+    [attr.aria-label]="label() ? null : placeholder()"
+    [value]="value()"
+    (input)="actualizar($event)"
   >
-
 </div>

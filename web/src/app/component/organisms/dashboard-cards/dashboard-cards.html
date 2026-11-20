@@ -1,18 +1,6 @@
-<section class="dashboard-cards">
-
-  <app-stats-card
-    title="Productos"
-    [value]="52"
-  />
-
-  <app-stats-card
-    title="Mesas"
-    [value]="15"
-  />
-
-  <app-stats-card
-    title="Pedidos"
-    [value]="8"
-  />
-
+<section class="dashboard-cards" aria-label="Resumen del día">
+  <app-stats-card title="Pedidos activos" [value]="resumen()?.pedidosActivos ?? null" hint="Creados o en preparación" link="/pedidos" />
+  <app-stats-card title="Mesas disponibles" [value]="resumen()?.mesasDisponibles ?? null" hint="Listas para recibir clientes" link="/mesas" />
+  <app-stats-card title="Entregados hoy" [value]="resumen()?.pedidosEntregadosHoy ?? null" hint="Pedidos cerrados en el día" link="/pedidos" />
+  <app-stats-card title="Productos en carta" [value]="resumen()?.productosActivos ?? null" hint="Marcados como disponibles" link="/productos" />
 </section>

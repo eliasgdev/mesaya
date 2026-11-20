@@ -1,14 +1,17 @@
 <div class="input-number">
-
-  <label class="input-number__label">
-    {{ label }}
-  </label>
-
+  @if (label()) {
+    <label class="input-number__label" [for]="id">{{ label() }}</label>
+  }
   <input
     class="input-number__input"
     type="number"
-    [placeholder]="placeholder"
-    [(ngModel)]="value"
+    inputmode="numeric"
+    [id]="id"
+    [placeholder]="placeholder()"
+    [attr.min]="min()"
+    [step]="step()"
+    [required]="required()"
+    [value]="value() ?? ''"
+    (input)="actualizar($event)"
   >
-
 </div>

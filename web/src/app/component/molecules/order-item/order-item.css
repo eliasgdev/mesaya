@@ -1,16 +1,12 @@
 .order-item {
-  display: flex;
-  justify-content: space-between;
-
-  background: white;
-  padding: 16px;
-  border-radius: 12px;
+  display: grid;
+  grid-template-columns: 44px 1fr auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-borde);
 }
-
-.order-item__product {
-  font-weight: 600;
-}
-
-.order-item__quantity {
-  color: #6b7280;
-}
+.order-item__quantity { font-weight: 800; color: var(--color-primario); }
+.order-item__product { margin: 0; font-weight: 600; }
+.order-item__precio { margin: 2px 0 0; font-size: 13px; color: var(--color-texto-suave); }
+.order-item__subtotal { font-weight: 700; }

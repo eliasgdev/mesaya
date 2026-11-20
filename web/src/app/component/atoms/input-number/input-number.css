@@ -1,15 +1,11 @@
-.input-number {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.input-number__label {
-  font-weight: 600;
-}
-
+.input-number { display: flex; flex-direction: column; gap: 6px; }
+.input-number__label { font-size: 14px; font-weight: 600; color: var(--color-texto); }
 .input-number__input {
-  border: 1px solid #dcdcdc;
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid var(--color-borde);
   border-radius: 10px;
-  padding: 12px;
+  background: white;
+  min-width: 0;
 }
+.input-number__input:focus { outline: 2px solid var(--color-primario); outline-offset: 1px; border-color: transparent; }

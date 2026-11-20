@@ -1,6 +1,1 @@
-<span
-  class="badge-status"
-  [ngClass]="'badge-status--' + status.toLowerCase()"
->
-  {{ status }}
-</span>
+<span [class]="'badge-status badge-status--' + status().toLowerCase()">{{ etiqueta() }}</span>

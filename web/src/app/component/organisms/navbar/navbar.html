@@ -1,11 +1,7 @@
 <header class="navbar">
-
-  <h1 class="navbar__title">
-    {{ title }}
-  </h1>
-
+  <h1 class="navbar__title">{{ title() }}</h1>
   <div class="navbar__user">
-    Admin
+    <span class="navbar__nombre">{{ auth.usuario()?.nombre }}</span>
+    <app-icon-button icon="salir" label="Cerrar sesión" (click)="auth.cerrarSesion()" />
   </div>
-
 </header>

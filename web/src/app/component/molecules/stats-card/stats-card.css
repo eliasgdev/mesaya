@@ -1,15 +1,16 @@
 .stats-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   background: white;
-  padding: 24px;
+  padding: 22px;
   border-radius: 16px;
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow 0.15s;
 }
 
-.stats-card__title {
-  color: #6b7280;
-  margin-bottom: 10px;
-}
-
-.stats-card__value {
-  font-size: 32px;
-  font-weight: bold;
-}
+.stats-card:hover { box-shadow: 0 6px 18px rgba(17, 24, 39, 0.08); }
+.stats-card__title { color: var(--color-texto-suave); font-size: 14px; font-weight: 600; }
+.stats-card__value { font-size: 34px; font-weight: 800; color: var(--color-texto); }
+.stats-card__hint { font-size: 13px; color: var(--color-texto-suave); }

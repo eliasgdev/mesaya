@@ -1,41 +1,33 @@
 <div class="products-table">
-
   <table class="products-table__table">
-
     <thead>
-
       <tr>
         <th>Producto</th>
-        <th>Precio</th>
+        <th>Categoría</th>
+        <th class="num">Precio</th>
+        <th class="num">Stock</th>
         <th>Estado</th>
-        <th>Acciones</th>
+        <th><span class="sr-only">Acciones</span></th>
       </tr>
-
     </thead>
-
     <tbody>
-
-      <tr>
-
-        <td>Hamburguesa</td>
-
-        <td>$20.000</td>
-
-        <td>
-          <app-table-tag
-            text="Activo"
-            type="success"
-          />
-        </td>
-
-        <td>
-          <app-table-actions />
-        </td>
-
-      </tr>
-
+      @for (p of productos(); track p.idProducto) {
+        <tr>
+          <td>
+            <strong>{{ p.nombre }}</strong>
+            @if (p.descripcion) { <span class="products-table__sub">{{ p.descripcion }}</span> }
+          </td>
+          <td>{{ p.categoria }}</td>
+          <td class="num">{{ p.precio | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</td>
+          <td class="num">{{ p.stock }}</td>
+          <td>
+            <app-table-tag [text]="p.disponible ? 'Disponible' : 'No disponible'" [type]="p.disponible ? 'success' : 'danger'" />
+          </td>
+          <td><app-table-actions [nombre]="p.nombre" (editar)="editar.emit(p)" (eliminar)="eliminar.emit(p)" /></td>
+        </tr>
+      } @empty {
+        <tr><td colspan="6" class="products-table__vacio">No hay productos que coincidan.</td></tr>
+      }
     </tbody>
-
   </table>
-
 </div>

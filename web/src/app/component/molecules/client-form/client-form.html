@@ -1,23 +1,12 @@
-<form class="client-form">
-
-  <app-input-field
-    label="Nombre"
-    placeholder="Juan Pérez"
-  />
-
-  <app-input-field
-    label="Correo"
-    placeholder="correo@gmail.com"
-  />
-
-  <app-input-field
-    label="Teléfono"
-    placeholder="3001234567"
-  />
-
-  <app-button
-    text="Guardar cliente"
-    type="primary"
-  />
-
+<form class="client-form" (submit)="$event.preventDefault(); onSubmit()" novalidate>
+  <app-input-field label="Nombre" placeholder="Nombre y apellido" [maxlength]="150" [required]="true"
+                   [(value)]="nombre" />
+  <app-input-field label="Correo" type="email" placeholder="correo@ejemplo.com" [required]="true" [(value)]="email" />
+  <app-input-field label="Teléfono (opcional)" type="tel" placeholder="3001234567" [maxlength]="20"
+                   [(value)]="telefono" />
+  <app-error-message [message]="errorLocal() ?? error()" />
+  <div class="client-form__acciones">
+    <app-button text="Cancelar" type="ghost" (click)="cancelar.emit()" />
+    <app-button [text]="cliente() ? 'Guardar cambios' : 'Agregar cliente'" buttonType="submit" [loading]="loading()" />
+  </div>
 </form>

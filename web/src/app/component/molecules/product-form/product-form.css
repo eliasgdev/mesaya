@@ -1,5 +1,15 @@
-.product-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.product-form { display: flex; flex-direction: column; gap: 14px; }
+.product-form__fila { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.product-form__sugerencias { display: flex; flex-wrap: wrap; gap: 6px; margin-top: -6px; }
+.product-form__sugerencias button {
+  border: 1px solid var(--color-borde);
+  background: white;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
 }
+.product-form__sugerencias button.activa { border-color: var(--color-primario); color: var(--color-primario); }
+.product-form__check { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.product-form__acciones { display: flex; justify-content: flex-end; gap: 10px; margin-top: 4px; }

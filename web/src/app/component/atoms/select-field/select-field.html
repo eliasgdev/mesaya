@@ -1,21 +1,13 @@
 <div class="select-field">
-
-  <label class="select-field__label">
-    {{ label }}
-  </label>
-
-  <select
-    class="select-field__select"
-    [(ngModel)]="selected"
-  >
-
-    <option
-      *ngFor="let option of options"
-      [value]="option"
-    >
-      {{ option }}
-    </option>
-
+  @if (label()) {
+    <label class="select-field__label" [for]="id">{{ label() }}</label>
+  }
+  <select class="select-field__select" [id]="id" [required]="required()" (change)="actualizar($event)">
+    @if (placeholder()) {
+      <option value="" [selected]="selected() === ''">{{ placeholder() }}</option>
+    }
+    @for (opcion of options(); track opcion.valor) {
+      <option [value]="opcion.valor" [selected]="opcion.valor === selected()">{{ opcion.etiqueta }}</option>
+    }
   </select>
-
 </div>

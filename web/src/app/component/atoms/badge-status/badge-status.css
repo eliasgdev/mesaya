@@ -1,26 +1,12 @@
 .badge-status {
-  padding: 6px 12px;
-  border-radius: 20px;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
+  white-space: nowrap;
 }
-
-.badge-status--activo {
-  background: #dcfce7;
-  color: #166534;
-}
-
-.badge-status--inactivo {
-  background: #fee2e2;
-  color: #991b1b;
-}
-
-.badge-status--ocupada {
-  background: #fee2e2;
-  color: #991b1b;
-}
-
-.badge-status--disponible {
-  background: #dcfce7;
-  color: #166534;
-}
+.badge-status--disponible, .badge-status--entregada { background: #dcfce7; color: #166534; }
+.badge-status--ocupada { background: #fee2e2; color: #991b1b; }
+.badge-status--reservada, .badge-status--creada { background: #e0e7ff; color: #3730a3; }
+.badge-status--en_preparacion { background: #fef3c7; color: #92400e; }

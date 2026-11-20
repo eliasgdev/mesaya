@@ -1,0 +1,7 @@
+<dialog #dialogo [class]="'modal modal--' + ancho()" (cancel)="$event.preventDefault(); cerrar()">
+  <div class="modal__header">
+    <h2 class="modal__title">{{ title() }}</h2>
+    <app-modal-close (close)="cerrar()" />
+  </div>
+  <ng-content />
+</dialog>

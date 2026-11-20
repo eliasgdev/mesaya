@@ -1,8 +1,8 @@
-// ===============================
+// =====================================
 // ATOM — LINK TEXT
-// ===============================
+// =====================================
 
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -10,12 +10,9 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './link-text.html',
-  styleUrl: './link-text.css'
+  styleUrl: './link-text.css',
 })
 export class LinkTextComponent {
-
-  @Input() text = '';
-
-  @Input() link = '';
-
+  readonly text = input('');
+  readonly link = input('');
 }

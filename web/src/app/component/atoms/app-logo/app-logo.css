@@ -1,5 +1,5 @@
 .app-logo {
   font-size: 28px;
   font-weight: bold;
-  color: #ff7a00;
+  color: var(--color-primario);
 }

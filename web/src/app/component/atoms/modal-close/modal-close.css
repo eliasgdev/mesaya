@@ -1,19 +1,17 @@
 .modal-close {
-  width: 36px;
-  height: 36px;
-
+  width: 34px;
+  height: 34px;
   border: none;
-  border-radius: 50%;
-
-  background: #ef4444;
-  color: white;
-
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-texto-suave);
   cursor: pointer;
-
-  font-size: 16px;
-  font-weight: bold;
-
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.modal-close:hover {
+  background: #eef0f4;
+  color: var(--color-texto);
 }

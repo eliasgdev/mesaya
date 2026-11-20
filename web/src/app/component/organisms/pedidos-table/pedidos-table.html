@@ -1,44 +1,41 @@
 <div class="pedidos-table">
-
   <table class="pedidos-table__table">
-
     <thead>
-
       <tr>
+        <th>Pedido</th>
         <th>Mesa</th>
         <th>Cliente</th>
-        <th>Total</th>
+        <th class="num">Total</th>
         <th>Estado</th>
-        <th>Acciones</th>
+        <th><span class="sr-only">Acciones</span></th>
       </tr>
-
     </thead>
-
     <tbody>
-
-      <tr>
-
-        <td>Mesa 1</td>
-
-        <td>Juan Pérez</td>
-
-        <td>$50.000</td>
-
-        <td>
-          <app-table-tag
-            text="Preparando"
-            type="warning"
-          />
-        </td>
-
-        <td>
-          <app-table-actions />
-        </td>
-
-      </tr>
-
+      @for (p of pedidos(); track p.idPedido) {
+        <tr>
+          <td>
+            <a class="pedidos-table__link" [routerLink]="['/pedido', p.idPedido]">#{{ p.idPedido }}</a>
+            <span class="pedidos-table__sub">{{ p.fechaCreacion | date: 'd MMM, h:mm a' }}</span>
+          </td>
+          <td>Mesa {{ p.numeroMesa }}</td>
+          <td>{{ p.nombreCliente || 'Sin registrar' }}</td>
+          <td class="num">{{ p.total | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</td>
+          <td><app-badge-status [status]="p.estado" /></td>
+          <td>
+            <div class="pedidos-table__acciones">
+              @if (siguienteAccion[p.estado]; as accion) {
+                <button type="button" class="pedidos-table__avanzar" (click)="avanzar.emit(p)">{{ accion }}</button>
+              }
+              <a class="pedidos-table__ver" [routerLink]="['/pedido', p.idPedido]" [attr.aria-label]="'Ver pedido ' + p.idPedido">Ver</a>
+              @if (p.estado === 'CREADA') {
+                <app-icon-button icon="eliminar" type="danger" [label]="'Eliminar pedido ' + p.idPedido" (click)="eliminar.emit(p)" />
+              }
+            </div>
+          </td>
+        </tr>
+      } @empty {
+        <tr><td colspan="6" class="pedidos-table__vacio">No hay pedidos en esta vista.</td></tr>
+      }
     </tbody>
-
   </table>
-
 </div>

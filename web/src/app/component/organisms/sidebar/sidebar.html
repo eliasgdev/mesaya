@@ -1,46 +1,8 @@
 <aside class="sidebar">
-
-  <div class="sidebar__logo">
-    <app-app-logo />
-  </div>
-
-  <nav class="sidebar__menu">
-
-    <a
-      routerLink="/dashboard"
-      class="sidebar__link"
-    >
-      Dashboard
-    </a>
-
-    <a
-      routerLink="/productos"
-      class="sidebar__link"
-    >
-      Productos
-    </a>
-
-    <a
-      routerLink="/clientes"
-      class="sidebar__link"
-    >
-      Clientes
-    </a>
-
-    <a
-      routerLink="/mesas"
-      class="sidebar__link"
-    >
-      Mesas
-    </a>
-
-    <a
-      routerLink="/pedidos"
-      class="sidebar__link"
-    >
-      Pedidos
-    </a>
-
+  <div class="sidebar__logo"><app-app-logo /></div>
+  <nav class="sidebar__menu" aria-label="Menú principal">
+    @for (e of enlaces; track e.ruta) {
+      <a class="sidebar__link" [routerLink]="e.ruta" routerLinkActive="sidebar__link--activo" ariaCurrentWhenActive="page">{{ e.texto }}</a>
+    }
   </nav>
-
 </aside>

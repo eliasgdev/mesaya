@@ -1,37 +1,26 @@
 .icon-button {
-  width: 42px;
-  height: 42px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-
-  display: flex;
-  justify-content: center;
+  display: inline-flex;
   align-items: center;
-
-  transition: 0.3s;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+  transition: background 0.15s;
 }
 
-.icon-button__icon {
-  font-size: 18px;
+.icon-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
-.icon-button--primary {
-  background: #ff7a00;
-  color: white;
-}
-
-.icon-button--secondary {
-  background: #5b2cff;
-  color: white;
-}
-
-.icon-button--danger {
-  background: #ef4444;
-  color: white;
-}
-
-.icon-button--success {
-  background: #10b981;
-  color: white;
-}
+.icon-button--secondary { color: var(--color-texto-suave); }
+.icon-button--secondary:hover:not(:disabled) { background: #eef0f4; color: var(--color-texto); }
+.icon-button--primary { color: var(--color-primario); }
+.icon-button--primary:hover:not(:disabled) { background: #fff1e5; }
+.icon-button--danger { color: var(--color-peligro); }
+.icon-button--danger:hover:not(:disabled) { background: #fee2e2; }
+.icon-button--success { color: var(--color-exito); }
+.icon-button--success:hover:not(:disabled) { background: #d1fae5; }

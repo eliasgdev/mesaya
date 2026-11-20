@@ -1,11 +1,11 @@
 <div class="order-item">
-
-  <p class="order-item__product">
-    {{ product }}
-  </p>
-
-  <span class="order-item__quantity">
-    x{{ quantity }}
-  </span>
-
+  <span class="order-item__quantity">{{ detalle().cantidad }}×</span>
+  <div class="order-item__info">
+    <p class="order-item__product">{{ detalle().nombreProducto }}</p>
+    <p class="order-item__precio">{{ detalle().precioUnitario | currency: 'COP' : 'symbol-narrow' : '1.0-0' }} c/u</p>
+  </div>
+  <span class="order-item__subtotal">{{ detalle().subtotal | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</span>
+  @if (puedeQuitar()) {
+    <app-icon-button icon="eliminar" type="danger" [label]="'Quitar ' + detalle().nombreProducto" (click)="quitar.emit()" />
+  }
 </div>

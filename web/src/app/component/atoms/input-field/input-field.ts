@@ -1,21 +1,28 @@
-import { Component, Input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+// =====================================
+// ATOM — INPUT FIELD
+// =====================================
+
+import { Component, input, model } from '@angular/core';
+
+let siguienteId = 0;
 
 @Component({
   selector: 'app-input-field',
   standalone: true,
-  imports: [FormsModule],
   templateUrl: './input-field.html',
-  styleUrl: './input-field.css'
+  styleUrl: './input-field.css',
 })
 export class InputFieldComponent {
+  readonly label = input('');
+  readonly placeholder = input('');
+  readonly type = input<'text' | 'email' | 'password' | 'tel' | 'search' | 'url'>('text');
+  readonly autocomplete = input('off');
+  readonly required = input(false);
+  readonly maxlength = input<number | null>(null);
+  readonly value = model('');
+  readonly id = `campo-${++siguienteId}`;
 
-  @Input() label = '';
-
-  @Input() placeholder = '';
-
-  @Input() type = 'text';
-
-  value = '';
-
+  actualizar(evento: Event): void {
+    this.value.set((evento.target as HTMLInputElement).value);
+  }
 }

@@ -1,24 +1,10 @@
-<form class="register-form">
-
-  <app-input-field
-    label="Nombre completo"
-    placeholder="Ingresa tu nombre"
-  />
-
-  <app-input-field
-    label="Correo"
-    placeholder="correo@gmail.com"
-  />
-
-  <app-input-field
-    label="Contraseña"
-    placeholder="********"
-    type="password"
-  />
-
-  <app-button
-    text="Registrarse"
-    type="primary"
-  />
-
+<form class="register-form" (submit)="$event.preventDefault(); onSubmit()" novalidate>
+  <app-input-field label="Nombre completo" placeholder="Tu nombre" autocomplete="name" [maxlength]="150"
+                   [required]="true" [(value)]="nombre" />
+  <app-input-field label="Correo" type="email" placeholder="correo@ejemplo.com" autocomplete="email"
+                   [required]="true" [(value)]="email" />
+  <app-input-field label="Contraseña" type="password" placeholder="Mínimo 6 caracteres" autocomplete="new-password"
+                   [required]="true" [(value)]="password" />
+  <app-error-message [message]="errorLocal() ?? error()" />
+  <app-button text="Crear cuenta" buttonType="submit" [loading]="loading()" />
 </form>

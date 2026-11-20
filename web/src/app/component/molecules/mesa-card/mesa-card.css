@@ -1,13 +1,4 @@
-.mesa-card {
-  background: white;
-  padding: 24px;
-  border-radius: 16px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.mesa-card__title {
-  font-size: 20px;
-}
+.mesa-card { background: white; border-radius: 16px; padding: 18px; }
+.mesa-card__top { display: flex; justify-content: space-between; align-items: center; }
+.mesa-card__title { margin: 0; font-size: 18px; }
+.mesa-card__capacidad { margin: 4px 0 12px; color: var(--color-texto-suave); font-size: 14px; }

@@ -1,0 +1,18 @@
+.pedido-form { display: flex; flex-direction: column; gap: 14px; }
+.pedido-form__fila { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.pedido-form__nota { margin: 0; font-size: 14px; color: var(--color-texto-suave); }
+.pedido-form__productos { border: none; padding: 0; margin: 0; }
+.pedido-form__productos legend { font-size: 14px; font-weight: 600; margin-bottom: 8px; padding: 0; }
+.pedido-form__productos ::ng-deep .table-search { margin-bottom: 8px; max-width: none; }
+.pedido-form__lista { list-style: none; margin: 0; padding: 0; max-height: 260px; overflow-y: auto; }
+.pedido-form__producto { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--color-borde); }
+.pedido-form__nombre { display: block; font-weight: 600; }
+.pedido-form__precio { font-size: 13px; color: var(--color-texto-suave); }
+.pedido-form__contador { display: flex; align-items: center; gap: 4px; }
+.pedido-form__cantidad { min-width: 24px; text-align: center; font-weight: 700; }
+.pedido-form__pie { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.pedido-form__total { margin: 0; color: var(--color-texto-suave); }
+.pedido-form__total strong { color: var(--color-texto); font-size: 18px; }
+.pedido-form__acciones { display: flex; gap: 10px; }
+
+@media (max-width: 560px) { .pedido-form__fila { grid-template-columns: 1fr; } }

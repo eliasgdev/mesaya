@@ -1,15 +1,5 @@
-<div class="table-search">
-
-  <div class="table-search__input">
-    <app-input-field
-      label="Buscar"
-      placeholder="Buscar..."
-    />
-  </div>
-
-  <app-icon-button
-    icon="🔍"
-    type="primary"
-  />
-
+<div class="table-search" role="search">
+  <svg class="table-search__icono" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+  <app-input-field type="search" [placeholder]="placeholder()" [(value)]="termino" />
 </div>

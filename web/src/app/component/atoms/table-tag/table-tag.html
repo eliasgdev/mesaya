@@ -1,6 +1,1 @@
-<span
-  class="table-tag"
-  [ngClass]="'table-tag--' + type"
->
-  {{ text }}
-</span>
+<span [class]="'table-tag table-tag--' + type()">{{ text() }}</span>

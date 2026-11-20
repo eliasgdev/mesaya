@@ -1,18 +1,7 @@
 <div class="mesas-grid">
-
-  <app-mesa-card
-    [number]="1"
-    status="Disponible"
-  />
-
-  <app-mesa-card
-    [number]="2"
-    status="Ocupada"
-  />
-
-  <app-mesa-card
-    [number]="3"
-    status="Disponible"
-  />
-
+  @for (m of mesas(); track m.idMesa) {
+    <app-mesa-card [mesa]="m" (editar)="editar.emit(m)" (eliminar)="eliminar.emit(m)" />
+  } @empty {
+    <p class="mesas-grid__vacio">Aún no hay mesas. Agrega la primera.</p>
+  }
 </div>

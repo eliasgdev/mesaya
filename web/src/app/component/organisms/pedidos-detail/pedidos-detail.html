@@ -1,21 +1,28 @@
-<div class="pedidos-detail">
+<section class="pedidos-detail">
+  <header class="pedidos-detail__header">
+    <div>
+      <h2 class="pedidos-detail__title">Pedido #{{ pedido().idPedido }}</h2>
+      <p class="pedidos-detail__meta">
+        Mesa {{ pedido().numeroMesa }} · {{ pedido().nombreCliente || 'Cliente sin registrar' }} ·
+        {{ pedido().fechaCreacion | date: "d 'de' MMMM, h:mm a" }}
+      </p>
+      <p class="pedidos-detail__meta">Tomado por {{ pedido().nombreUsuario }}</p>
+    </div>
+    <app-badge-status [status]="pedido().estado" />
+  </header>
 
-  <h2 class="pedidos-detail__title">
-    Detalle Pedido
-  </h2>
+  @if (pedido().observaciones) {
+    <p class="pedidos-detail__obs"><strong>Observaciones:</strong> {{ pedido().observaciones }}</p>
+  }
 
   <div class="pedidos-detail__items">
-
-    <app-order-item
-      product="Hamburguesa"
-      [quantity]="2"
-    />
-
-    <app-order-item
-      product="Gaseosa"
-      [quantity]="1"
-    />
-
+    @for (d of pedido().detalles; track d.idDetalle) {
+      <app-order-item [detalle]="d" [puedeQuitar]="puedeQuitar()" (quitar)="quitar.emit(d.idDetalle)" />
+    }
   </div>
 
-</div>
+  <p class="pedidos-detail__total">
+    <span>Total</span>
+    <strong>{{ pedido().total | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</strong>
+  </p>
+</section>

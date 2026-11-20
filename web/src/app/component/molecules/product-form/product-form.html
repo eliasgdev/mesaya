@@ -1,23 +1,33 @@
-<form class="product-form">
+<form class="product-form" (submit)="$event.preventDefault(); onSubmit()" novalidate>
+  <app-input-field label="Nombre" placeholder="Ej. Ajiaco santafereño" [maxlength]="150" [required]="true"
+                   [(value)]="nombre" />
+  <app-input-field label="Descripción (opcional)" placeholder="Ingredientes o porción" [(value)]="descripcion" />
 
-  <app-input-field
-    label="Nombre"
-    placeholder="Hamburguesa"
-  />
+  <div class="product-form__fila">
+    <app-input-number label="Precio (COP)" placeholder="28000" [min]="0" [step]="100" [required]="true"
+                      [(value)]="precio" />
+    <app-input-number label="Stock" placeholder="0" [min]="0" [required]="true" [(value)]="stock" />
+  </div>
 
-  <app-input-number
-    label="Precio"
-    placeholder="20000"
-  />
+  <app-input-field label="Categoría" placeholder="Ej. Platos fuertes" [maxlength]="80" [required]="true"
+                   [(value)]="categoria" />
+  @if (categorias().length) {
+    <div class="product-form__sugerencias">
+      @for (c of categorias(); track c) {
+        <button type="button" [class.activa]="c === categoria()" (click)="categoria.set(c)">{{ c }}</button>
+      }
+    </div>
+  }
 
-  <app-select-field
-    label="Categoría"
-    [options]="categories"
-  />
+  <label class="product-form__check">
+    <input type="checkbox" [checked]="disponible()" (change)="disponible.set($any($event.target).checked)">
+    Disponible para pedir
+  </label>
 
-  <app-button
-    text="Guardar producto"
-    type="primary"
-  />
+  <app-error-message [message]="errorLocal() ?? error()" />
 
+  <div class="product-form__acciones">
+    <app-button text="Cancelar" type="ghost" (click)="cancelar.emit()" />
+    <app-button [text]="producto() ? 'Guardar cambios' : 'Agregar producto'" buttonType="submit" [loading]="loading()" />
+  </div>
 </form>

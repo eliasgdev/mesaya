@@ -1,0 +1,50 @@
+<form class="pedido-form" (submit)="$event.preventDefault(); onSubmit()" novalidate>
+  <div class="pedido-form__fila">
+    <app-select-field label="Mesa" placeholder="Elige una mesa" [options]="opcionesMesa()" [required]="true"
+                      [(selected)]="idMesa" />
+    <app-select-field label="Cliente (opcional)" placeholder="Sin registrar" [options]="opcionesCliente()"
+                      [(selected)]="idCliente" />
+  </div>
+  @if (!opcionesMesa().length) {
+    <p class="pedido-form__nota">Todas las mesas están ocupadas. Entrega o elimina un pedido para liberar una.</p>
+  }
+
+  <fieldset class="pedido-form__productos">
+    <legend>Productos</legend>
+    <app-table-search placeholder="Buscar en la carta" [(termino)]="busqueda" />
+    <ul class="pedido-form__lista">
+      @for (p of productosVisibles(); track p.idProducto) {
+        <li class="pedido-form__producto">
+          <div>
+            <span class="pedido-form__nombre">{{ p.nombre }}</span>
+            <span class="pedido-form__precio">{{ p.precio | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</span>
+          </div>
+          <div class="pedido-form__contador">
+            <app-icon-button icon="menos" [label]="'Quitar una unidad de ' + p.nombre"
+                             [disabled]="!cantidades()[p.idProducto]" (click)="cambiarCantidad(p.idProducto, -1)" />
+            <span class="pedido-form__cantidad" aria-live="polite">{{ cantidades()[p.idProducto] ?? 0 }}</span>
+            <app-icon-button icon="mas" type="primary" [label]="'Agregar una unidad de ' + p.nombre"
+                             (click)="cambiarCantidad(p.idProducto, 1)" />
+          </div>
+        </li>
+      } @empty {
+        <li class="pedido-form__nota">No hay productos disponibles con ese nombre.</li>
+      }
+    </ul>
+  </fieldset>
+
+  <app-input-field label="Observaciones (opcional)" placeholder="Ej. sin cebolla, término medio" [(value)]="observaciones" />
+
+  <app-error-message [message]="errorLocal() ?? error()" />
+
+  <div class="pedido-form__pie">
+    <p class="pedido-form__total">
+      {{ cantidadItems() }} {{ cantidadItems() === 1 ? 'producto' : 'productos' }} ·
+      <strong>{{ total() | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</strong>
+    </p>
+    <div class="pedido-form__acciones">
+      <app-button text="Cancelar" type="ghost" (click)="cancelar.emit()" />
+      <app-button text="Crear pedido" buttonType="submit" [loading]="loading()" />
+    </div>
+  </div>
+</form>

@@ -1,8 +1,7 @@
-.dashboard-layout {
-  display: flex;
-}
+.dashboard-layout { display: flex; min-height: 100vh; }
+.dashboard-layout__content { flex: 1; min-width: 0; padding: 28px 32px; }
 
-.dashboard-layout__content {
-  flex: 1;
-  padding: 30px;
+@media (max-width: 860px) {
+  .dashboard-layout { flex-direction: column; max-width: 100vw; }
+  .dashboard-layout__content { padding: 20px 16px; }
 }

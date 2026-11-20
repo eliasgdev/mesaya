@@ -1,22 +1,13 @@
-<form
-  class="login-form"
-  (ngSubmit)="onSubmit()"
->
-
-  <app-input-field
-    label="Correo"
-    placeholder="correo@gmail.com"
-  />
-
-  <app-input-field
-    label="Contraseña"
-    placeholder="********"
-    type="password"
-  />
-
-  <app-button
-    text="Ingresar"
-    type="primary"
-  />
-
+<form class="login-form" (submit)="$event.preventDefault(); onSubmit()" novalidate>
+  <app-input-field label="Correo" type="email" placeholder="correo@ejemplo.com" autocomplete="email"
+                   [required]="true" [(value)]="email" />
+  <app-input-field label="Contraseña" type="password" placeholder="Tu contraseña" autocomplete="current-password"
+                   [required]="true" [(value)]="password" />
+  <app-error-message [message]="errorLocal() ?? error()" />
+  <app-button text="Ingresar" buttonType="submit" [loading]="loading()" />
 </form>
+
+<div class="login-form__demo">
+  <span>¿Solo quieres probar?</span>
+  <button type="button" (click)="usarDemo('demo@mesaya.co', 'MesaYa2026')">Usar la cuenta de demostración</button>
+</div>

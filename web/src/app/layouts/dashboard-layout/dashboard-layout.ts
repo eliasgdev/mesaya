@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { SidebarComponent } from '../sidebar/sidebar';
+import { SidebarComponent } from '../../component/organisms/sidebar/sidebar';
 
 @Component({
   selector: 'app-dashboard-layout',

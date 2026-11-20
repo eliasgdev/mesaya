@@ -1,0 +1,16 @@
+<form class="mesa-form" (submit)="$event.preventDefault(); onSubmit()" novalidate>
+  <div class="mesa-form__fila">
+    <app-input-number label="Número de mesa" placeholder="9" [min]="1" [required]="true" [(value)]="numero" />
+    <app-input-number label="Capacidad (personas)" placeholder="4" [min]="1" [required]="true" [(value)]="capacidad" />
+  </div>
+  @if (ocupada()) {
+    <p class="mesa-form__nota">La mesa está ocupada. Se libera sola cuando su pedido se entrega o se elimina.</p>
+  } @else {
+    <app-select-field label="Estado" [options]="estados" [(selected)]="estado" />
+  }
+  <app-error-message [message]="errorLocal() ?? error()" />
+  <div class="mesa-form__acciones">
+    <app-button text="Cancelar" type="ghost" (click)="cancelar.emit()" />
+    <app-button [text]="mesa() ? 'Guardar cambios' : 'Agregar mesa'" buttonType="submit" [loading]="loading()" />
+  </div>
+</form>

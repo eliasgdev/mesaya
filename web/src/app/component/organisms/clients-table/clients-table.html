@@ -1,36 +1,26 @@
 <div class="clients-table">
-
   <table class="clients-table__table">
-
     <thead>
-
       <tr>
         <th>Cliente</th>
         <th>Correo</th>
         <th>Teléfono</th>
-        <th>Acciones</th>
+        <th>Registrado</th>
+        <th><span class="sr-only">Acciones</span></th>
       </tr>
-
     </thead>
-
     <tbody>
-
-      <tr>
-
-        <td>Juan Pérez</td>
-
-        <td>juan@gmail.com</td>
-
-        <td>3001234567</td>
-
-        <td>
-          <app-table-actions />
-        </td>
-
-      </tr>
-
+      @for (c of clientes(); track c.idCliente) {
+        <tr>
+          <td><strong>{{ c.nombre }}</strong></td>
+          <td>{{ c.email }}</td>
+          <td>{{ c.telefono || '—' }}</td>
+          <td>{{ c.fechaRegistro | date: 'd MMM y' }}</td>
+          <td><app-table-actions [nombre]="c.nombre" (editar)="editar.emit(c)" (eliminar)="eliminar.emit(c)" /></td>
+        </tr>
+      } @empty {
+        <tr><td colspan="5" class="clients-table__vacio">No hay clientes que coincidan.</td></tr>
+      }
     </tbody>
-
   </table>
-
-</div>  
+</div>

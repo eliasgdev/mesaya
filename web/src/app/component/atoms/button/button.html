@@ -1,6 +1,8 @@
 <button
   class="button"
-  [ngClass]="'button--' + type"
+  [class]="'button button--' + type()"
+  [type]="buttonType()"
+  [disabled]="disabled() || loading()"
 >
-  {{ text }}
+  {{ loading() ? 'Procesando…' : text() }}
 </button>

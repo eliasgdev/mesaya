@@ -1,5 +1,31 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
+}
+
+.login-form__demo {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-borde);
+  font-size: 14px;
+  color: var(--color-texto-suave);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.login-form__demo button {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--color-secundario);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+app-button ::ng-deep .button {
+  width: 100%;
 }

@@ -1,22 +1,16 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// =====================================
+// ATOM — TABLE TAG
+// =====================================
+
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-table-tag',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './table-tag.html',
-  styleUrl: './table-tag.css'
+  styleUrl: './table-tag.css',
 })
 export class TableTagComponent {
-
-  @Input() text = '';
-
-  @Input() type:
-    | 'primary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-  = 'primary';
-
+  readonly text = input('');
+  readonly type = input<'primary' | 'success' | 'danger' | 'warning'>('primary');
 }

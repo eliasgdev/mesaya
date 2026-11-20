@@ -1,22 +1,19 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// =====================================
+// ATOM — BUTTON
+// =====================================
+
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './button.html',
-  styleUrl: './button.css'
+  styleUrl: './button.css',
 })
 export class ButtonComponent {
-
-  @Input() text = '';
-
-  @Input() type:
-    | 'primary'
-    | 'secondary'
-    | 'danger'
-    | 'success'
-  = 'primary';
-
+  readonly text = input('');
+  readonly type = input<'primary' | 'secondary' | 'danger' | 'success' | 'ghost'>('primary');
+  readonly buttonType = input<'button' | 'submit'>('button');
+  readonly disabled = input(false);
+  readonly loading = input(false);
 }

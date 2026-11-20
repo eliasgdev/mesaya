@@ -1,24 +1,31 @@
-// ===============================
+// =====================================
 // ATOM — SELECT FIELD
-// ===============================
+// =====================================
 
-import { Component, Input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { Component, input, model } from '@angular/core';
+
+export interface OpcionSelect {
+  valor: string;
+  etiqueta: string;
+}
+
+let siguienteId = 0;
 
 @Component({
   selector: 'app-select-field',
   standalone: true,
-  imports: [FormsModule, CommonModule],
   templateUrl: './select-field.html',
-  styleUrl: './select-field.css'
+  styleUrl: './select-field.css',
 })
 export class SelectFieldComponent {
+  readonly label = input('');
+  readonly options = input<OpcionSelect[]>([]);
+  readonly placeholder = input('');
+  readonly required = input(false);
+  readonly selected = model('');
+  readonly id = `seleccion-${++siguienteId}`;
 
-  @Input() label = '';
-
-  @Input() options: string[] = [];
-
-  selected = '';
-
+  actualizar(evento: Event): void {
+    this.selected.set((evento.target as HTMLSelectElement).value);
+  }
 }
