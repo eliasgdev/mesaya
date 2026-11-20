@@ -27,8 +27,8 @@ public class MesaServiceImpl implements IMesaService {
 	@Transactional(readOnly = true)
 	public List<MesaResponseDTO> listar(EstadoMesa estado) {
 		List<Mesa> lista = (estado != null)
-				? mesaRepository.findByEstado(estado)
-				: mesaRepository.findAll();
+				? mesaRepository.findByEstadoOrderByNumeroAsc(estado)
+				: mesaRepository.findAllByOrderByNumeroAsc();
 		return lista.stream().map(this::toDTO).collect(Collectors.toList());
 	}
 
@@ -66,6 +66,8 @@ public class MesaServiceImpl implements IMesaService {
 				id, List.of(EstadoPedido.CREADA, EstadoPedido.EN_PREPARACION));
 		if (activa)
 			throw new BusinessException("La mesa tiene pedidos activos y no puede eliminarse.");
+		if (pedidoRepository.existsByMesaIdMesa(id))
+			throw new BusinessException("La mesa tiene pedidos en el historial y no puede eliminarse.");
 		mesaRepository.deleteById(id);
 	}
 

@@ -7,6 +7,7 @@ import com.mesaya.entity.Cliente;
 import com.mesaya.exception.BusinessException;
 import com.mesaya.exception.ResourceNotFoundException;
 import com.mesaya.repository.ClienteRepository;
+import com.mesaya.repository.PedidoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 public class ClienteServiceImpl implements IClienteService {
 
 	private final ClienteRepository clienteRepository;
+	private final PedidoRepository pedidoRepository;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -59,6 +61,8 @@ public class ClienteServiceImpl implements IClienteService {
 	@Transactional
 	public void eliminar(Long id) {
 		buscar(id);
+		if (pedidoRepository.existsByClienteIdCliente(id))
+			throw new BusinessException("El cliente tiene pedidos registrados y no puede eliminarse.");
 		clienteRepository.deleteById(id);
 	}
 

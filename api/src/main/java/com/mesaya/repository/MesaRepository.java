@@ -8,7 +8,9 @@ import java.util.List;
 
 @Repository
 public interface MesaRepository extends JpaRepository<Mesa, Long> {
-	List<Mesa> findByEstado(EstadoMesa estado);
+	List<Mesa> findByEstadoOrderByNumeroAsc(EstadoMesa estado);
+
+	List<Mesa> findAllByOrderByNumeroAsc();
 	long countByEstado(EstadoMesa estado);
 	boolean existsByNumero(Integer numero);
 	boolean existsByNumeroAndIdMesaNot(Integer numero, Long idMesa);

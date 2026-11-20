@@ -1,10 +1,12 @@
 package com.mesaya.producto.service.impl;
 
 import com.mesaya.entity.Producto;
+import com.mesaya.exception.BusinessException;
 import com.mesaya.exception.ResourceNotFoundException;
 import com.mesaya.producto.dto.ProductoRequestDTO;
 import com.mesaya.producto.dto.ProductoResponseDTO;
 import com.mesaya.producto.service.interfaz.IProductoService;
+import com.mesaya.repository.DetallePedidoRepository;
 import com.mesaya.repository.ProductoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 public class ProductoServiceImpl implements IProductoService {
 
 	private final ProductoRepository productoRepository;
+	private final DetallePedidoRepository detallePedidoRepository;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -59,6 +62,8 @@ public class ProductoServiceImpl implements IProductoService {
 	@Transactional
 	public void eliminar(Long id) {
 		buscar(id);
+		if (detallePedidoRepository.existsByProductoIdProducto(id))
+			throw new BusinessException("El producto aparece en pedidos registrados. Márcalo como no disponible en lugar de eliminarlo.");
 		productoRepository.deleteById(id);
 	}
 
