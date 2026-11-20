@@ -1,9 +1,16 @@
+export type EstadoMesa = 'DISPONIBLE' | 'OCUPADA' | 'RESERVADA';
+
 export interface Mesa {
-
-  id: number;
-
+  idMesa: number;
   numero: number;
-
-  estado: string;
-
+  capacidad: number;
+  estado: EstadoMesa;
 }
+
+export type MesaRequest = Omit<Mesa, 'idMesa'>;
+
+export const ETIQUETA_ESTADO_MESA: Record<EstadoMesa, string> = {
+  DISPONIBLE: 'Disponible',
+  OCUPADA: 'Ocupada',
+  RESERVADA: 'Reservada',
+};

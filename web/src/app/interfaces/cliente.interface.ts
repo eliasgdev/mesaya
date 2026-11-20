@@ -1,11 +1,13 @@
 export interface Cliente {
-
-  id: number;
-
+  idCliente: number;
   nombre: string;
+  telefono: string | null;
+  email: string;
+  fechaRegistro: string;
+}
 
-  correo: string;
-
-  telefono: string;
-
+export interface ClienteRequest {
+  nombre: string;
+  telefono: string | null;
+  email: string;
 }

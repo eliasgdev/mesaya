@@ -1,54 +1,57 @@
 import { Routes } from '@angular/router';
 
-import { LoginPageComponent } from './pages/login-page/login-page';
-import { RegisterPageComponent } from './pages/register-page/register-page';
-import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page';
-import { ProductosPageComponent } from './pages/productos-page/productos-page';
-import { ClientesPageComponent } from './pages/clientes-page/clientes-page';
-import { MesasPageComponent } from './pages/mesas-page/mesas-page';
-import { PedidosPageComponent } from './pages/pedidos-page/pedidos-page';
-import { PedidoDetailPageComponent } from './pages/pedido-detail-page/pedido-detail-page';
+import { authGuard, invitadoGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
-
+  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   {
-    path: '',
-    component: LoginPageComponent
+    path: 'login',
+    canActivate: [invitadoGuard],
+    title: 'Iniciar sesión · MesaYa',
+    loadComponent: () => import('./pages/login-page/login-page').then((m) => m.LoginPageComponent),
   },
-
   {
     path: 'register',
-    component: RegisterPageComponent
+    canActivate: [invitadoGuard],
+    title: 'Crear cuenta · MesaYa',
+    loadComponent: () => import('./pages/register-page/register-page').then((m) => m.RegisterPageComponent),
   },
-
   {
-    path: 'dashboard',
-    component: DashboardPageComponent
+    path: '',
+    canActivateChild: [authGuard],
+    children: [
+      {
+        path: 'dashboard',
+        title: 'Panel · MesaYa',
+        loadComponent: () => import('./pages/dashboard-page/dashboard-page').then((m) => m.DashboardPageComponent),
+      },
+      {
+        path: 'productos',
+        title: 'Productos · MesaYa',
+        loadComponent: () => import('./pages/productos-page/productos-page').then((m) => m.ProductosPageComponent),
+      },
+      {
+        path: 'clientes',
+        title: 'Clientes · MesaYa',
+        loadComponent: () => import('./pages/clientes-page/clientes-page').then((m) => m.ClientesPageComponent),
+      },
+      {
+        path: 'mesas',
+        title: 'Mesas · MesaYa',
+        loadComponent: () => import('./pages/mesas-page/mesas-page').then((m) => m.MesasPageComponent),
+      },
+      {
+        path: 'pedidos',
+        title: 'Pedidos · MesaYa',
+        loadComponent: () => import('./pages/pedidos-page/pedidos-page').then((m) => m.PedidosPageComponent),
+      },
+      {
+        path: 'pedido/:id',
+        title: 'Detalle del pedido · MesaYa',
+        loadComponent: () =>
+          import('./pages/pedido-detail-page/pedido-detail-page').then((m) => m.PedidoDetailPageComponent),
+      },
+    ],
   },
-
-  {
-    path: 'productos',
-    component: ProductosPageComponent
-  },
-
-  {
-    path: 'clientes',
-    component: ClientesPageComponent
-  },
-
-  {
-    path: 'mesas',
-    component: MesasPageComponent
-  },
-
-  {
-    path: 'pedidos',
-    component: PedidosPageComponent
-  },
-
-  {
-    path: 'pedido/:id',
-    component: PedidoDetailPageComponent
-  }
-
+  { path: '**', redirectTo: 'dashboard' },
 ];
