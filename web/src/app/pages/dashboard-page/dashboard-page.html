@@ -1,13 +1,15 @@
 <app-dashboard-layout>
+  <app-navbar title="Panel" />
+  <p class="dashboard-page__saludo">{{ saludo() }}. Así va el servicio de hoy.</p>
 
-  <div class="dashboard-page">
+  <app-error-message [message]="error()" />
+  <app-dashboard-cards [resumen]="resumen()" />
 
-    <app-navbar
-      title="Dashboard"
-    />
-
-    <app-dashboard-cards />
-
-  </div>
-
+  <section class="dashboard-page__activos">
+    <div class="dashboard-page__titulo">
+      <h2>Pedidos en curso</h2>
+      <a routerLink="/pedidos">Ver todos</a>
+    </div>
+    <app-pedidos-table [pedidos]="activos()" (avanzar)="avanzar($event)" />
+  </section>
 </app-dashboard-layout>

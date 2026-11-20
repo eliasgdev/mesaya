@@ -1,13 +1,9 @@
 <app-auth-layout>
-
   <div class="login-page">
-
-    <h1 class="login-page__title">
-      MesaYa
-    </h1>
-
-    <app-login-form />
-
+    <app-app-logo />
+    <h1 class="login-page__title">Inicia sesión</h1>
+    <p class="login-page__sub">Gestiona mesas, carta y pedidos de tu restaurante.</p>
+    <app-login-form [loading]="cargando()" [error]="error()" (ingresar)="ingresar($event)" />
+    <p class="login-page__registro">¿No tienes cuenta? <app-link-text text="Crea una" link="/register" /></p>
   </div>
-
 </app-auth-layout>

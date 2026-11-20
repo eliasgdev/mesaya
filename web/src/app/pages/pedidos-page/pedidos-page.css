@@ -1,5 +1,14 @@
-.pedidos-page {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.pedidos-page__filtros { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.pedidos-page__filtros button {
+  border: none;
+  background: white;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-texto-suave);
+  cursor: pointer;
 }
+.pedidos-page__filtros button span { margin-left: 4px; font-weight: 700; }
+.pedidos-page__filtros button.activo { background: #111827; color: white; }

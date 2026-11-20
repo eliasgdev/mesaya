@@ -1,20 +1,27 @@
 <app-dashboard-layout>
+  <app-navbar title="Clientes" />
+  <app-page-header title="Clientes registrados" subtitle="Para asociar pedidos y contactar a quienes vuelven"
+                   buttonText="Agregar cliente" (accion)="abrirFormulario(null)" />
 
-  <div class="clientes-page">
+  @if (cargando()) {
+    <app-loading-spinner />
+  } @else if (errorCarga()) {
+    <app-error-message [message]="errorCarga()" />
+  } @else {
+    <app-table-search placeholder="Buscar por nombre, correo o teléfono" [(termino)]="busqueda" />
+    <app-clients-table [clientes]="filtrados()" (editar)="abrirFormulario($event)" (eliminar)="pedirEliminar($event)" />
+  }
 
-    <app-navbar
-      title="Clientes"
-    />
+  @if (enEdicion() !== undefined) {
+    <app-modal [title]="enEdicion() ? 'Editar cliente' : 'Nuevo cliente'" (close)="enEdicion.set(undefined)">
+      <app-client-form [cliente]="enEdicion() ?? null" [loading]="procesando()" [error]="errorAccion()"
+                       (guardar)="guardar($event)" (cancelar)="enEdicion.set(undefined)" />
+    </app-modal>
+  }
 
-    <app-page-header
-      title="Gestión Clientes"
-      buttonText="Agregar Cliente"
-    />
-
-    <app-table-search />
-
-    <app-clients-table />
-
-  </div>
-
+  @if (porEliminar(); as c) {
+    <app-confirm-dialog title="Eliminar cliente" [message]="'Se eliminará a ' + c.nombre + '. Si tiene pedidos registrados no se podrá eliminar.'"
+                        [loading]="procesando()" [error]="errorAccion()"
+                        (confirmar)="eliminar()" (cancelar)="porEliminar.set(null)" />
+  }
 </app-dashboard-layout>

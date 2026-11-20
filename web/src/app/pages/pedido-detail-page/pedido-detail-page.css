@@ -1,5 +1,4 @@
-.pedido-detail-page {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+.pedido-detail-page__volver { display: inline-block; margin-bottom: 14px; color: var(--color-texto-suave); text-decoration: none; font-weight: 600; font-size: 14px; }
+.pedido-detail-page__volver:hover { color: var(--color-texto); }
+.pedido-detail-page__acciones { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
+app-error-message { display: block; margin-bottom: 12px; }

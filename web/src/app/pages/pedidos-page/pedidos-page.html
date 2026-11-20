@@ -1,18 +1,37 @@
 <app-dashboard-layout>
+  <app-navbar title="Pedidos" />
+  <app-page-header title="Comandas" subtitle="Toma pedidos y avánzalos hasta entregarlos"
+                   buttonText="Nuevo pedido" (accion)="abrirCreacion()" />
 
-  <div class="pedidos-page">
-
-    <app-navbar
-      title="Pedidos"
-    />
-
-    <app-page-header
-      title="Gestión Pedidos"
-      buttonText="Crear Pedido"
-    />
-
-    <app-pedidos-table />
-
+  <div class="pedidos-page__filtros" role="tablist" aria-label="Filtrar pedidos">
+    @for (f of filtros; track f.valor) {
+      <button type="button" role="tab" [attr.aria-selected]="filtro() === f.valor"
+              [class.activo]="filtro() === f.valor" (click)="filtro.set(f.valor)">
+        {{ f.texto }} <span>{{ conteo()[f.valor] }}</span>
+      </button>
+    }
   </div>
 
+  @if (cargando()) {
+    <app-loading-spinner />
+  } @else if (errorCarga()) {
+    <app-error-message [message]="errorCarga()" />
+  } @else {
+    <app-pedidos-table [pedidos]="visibles()" (avanzar)="avanzar($event)" (eliminar)="pedirEliminar($event)" />
+  }
+
+  @if (creando()) {
+    <app-modal title="Nuevo pedido" ancho="amplio" (close)="creando.set(false)">
+      <app-pedido-form [mesas]="mesas()" [clientes]="clientes()" [productos]="productos()"
+                       [loading]="procesando()" [error]="errorAccion()"
+                       (guardar)="crear($event)" (cancelar)="creando.set(false)" />
+    </app-modal>
+  }
+
+  @if (porEliminar(); as p) {
+    <app-confirm-dialog [title]="'Eliminar pedido #' + p.idPedido"
+                        [message]="'Se eliminará el pedido de la mesa ' + p.numeroMesa + ' y la mesa quedará disponible.'"
+                        [loading]="procesando()" [error]="errorAccion()"
+                        (confirmar)="eliminar()" (cancelar)="porEliminar.set(null)" />
+  }
 </app-dashboard-layout>

@@ -1,20 +1,28 @@
 <app-dashboard-layout>
+  <app-navbar title="Productos" />
+  <app-page-header title="Carta del restaurante" subtitle="Lo que se puede pedir y a qué precio"
+                   buttonText="Agregar producto" (accion)="abrirFormulario(null)" />
 
-  <div class="productos-page">
+  @if (cargando()) {
+    <app-loading-spinner />
+  } @else if (errorCarga()) {
+    <app-error-message [message]="errorCarga()" />
+  } @else {
+    <app-table-search placeholder="Buscar por nombre o categoría" [(termino)]="busqueda" />
+    <app-products-table [productos]="filtrados()" (editar)="abrirFormulario($event)" (eliminar)="pedirEliminar($event)" />
+  }
 
-    <app-navbar
-      title="Productos"
-    />
+  @if (enEdicion() !== undefined) {
+    <app-modal [title]="enEdicion() ? 'Editar producto' : 'Nuevo producto'" (close)="enEdicion.set(undefined)">
+      <app-product-form [producto]="enEdicion() ?? null" [categorias]="categorias()" [loading]="procesando()"
+                        [error]="errorAccion()" (guardar)="guardar($event)" (cancelar)="enEdicion.set(undefined)" />
+    </app-modal>
+  }
 
-    <app-page-header
-      title="Gestión Productos"
-      buttonText="Agregar Producto"
-    />
-
-    <app-table-search />
-
-    <app-products-table />
-
-  </div>
-
+  @if (porEliminar(); as p) {
+    <app-confirm-dialog title="Eliminar producto"
+                        [message]="'Se eliminará «' + p.nombre + '» de la carta. Si ya aparece en pedidos, mejor márcalo como no disponible.'"
+                        [loading]="procesando()" [error]="errorAccion()"
+                        (confirmar)="eliminar()" (cancelar)="porEliminar.set(null)" />
+  }
 </app-dashboard-layout>

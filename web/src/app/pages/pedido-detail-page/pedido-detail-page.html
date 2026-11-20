@@ -1,13 +1,27 @@
 <app-dashboard-layout>
+  <app-navbar title="Detalle del pedido" />
+  <a class="pedido-detail-page__volver" routerLink="/pedidos">← Volver a pedidos</a>
 
-  <div class="pedido-detail-page">
+  @if (cargando()) {
+    <app-loading-spinner />
+  } @else if (pedido(); as p) {
+    <app-error-message [message]="error()" />
+    <app-pedidos-detail [pedido]="p" (quitar)="quitarItem($event)" />
+    <div class="pedido-detail-page__acciones">
+      @if (p.estado === 'CREADA') {
+        <app-button text="Eliminar pedido" type="ghost" (click)="confirmandoEliminar.set(true)" />
+      }
+      @if (siguienteAccion(); as accion) {
+        <app-button [text]="accion" type="success" [loading]="procesando()" (click)="avanzar()" />
+      }
+    </div>
+  } @else {
+    <app-error-message [message]="error()" />
+  }
 
-    <app-navbar
-      title="Detalle Pedido"
-    />
-
-    <app-pedidos-detail />
-
-  </div>
-
+  @if (confirmandoEliminar()) {
+    <app-confirm-dialog [title]="'Eliminar pedido #' + pedido()?.idPedido"
+                        message="El pedido se borrará y la mesa quedará disponible."
+                        [loading]="procesando()" (confirmar)="eliminar()" (cancelar)="confirmandoEliminar.set(false)" />
+  }
 </app-dashboard-layout>

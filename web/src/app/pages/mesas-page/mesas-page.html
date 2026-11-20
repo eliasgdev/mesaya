@@ -1,18 +1,27 @@
 <app-dashboard-layout>
+  <app-navbar title="Mesas" />
+  <app-page-header title="Salón" [subtitle]="cargando() ? '' : resumen()" buttonText="Agregar mesa"
+                   (accion)="abrirFormulario(null)" />
 
-  <div class="mesas-page">
+  @if (cargando()) {
+    <app-loading-spinner />
+  } @else if (errorCarga()) {
+    <app-error-message [message]="errorCarga()" />
+  } @else {
+    <app-mesas-grid [mesas]="mesas()" (editar)="abrirFormulario($event)" (eliminar)="pedirEliminar($event)" />
+  }
 
-    <app-navbar
-      title="Mesas"
-    />
+  @if (enEdicion() !== undefined) {
+    <app-modal [title]="enEdicion() ? 'Editar mesa ' + enEdicion()!.numero : 'Nueva mesa'" (close)="enEdicion.set(undefined)">
+      <app-mesa-form [mesa]="enEdicion() ?? null" [loading]="procesando()" [error]="errorAccion()"
+                     (guardar)="guardar($event)" (cancelar)="enEdicion.set(undefined)" />
+    </app-modal>
+  }
 
-    <app-page-header
-      title="Gestión Mesas"
-      buttonText="Agregar Mesa"
-    />
-
-    <app-mesas-grid />
-
-  </div>
-
+  @if (porEliminar(); as m) {
+    <app-confirm-dialog [title]="'Eliminar mesa ' + m.numero"
+                        message="La mesa dejará de aparecer en el salón. Si tiene pedidos en el historial no se podrá eliminar."
+                        [loading]="procesando()" [error]="errorAccion()"
+                        (confirmar)="eliminar()" (cancelar)="porEliminar.set(null)" />
+  }
 </app-dashboard-layout>

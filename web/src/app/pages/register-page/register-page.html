@@ -1,13 +1,9 @@
 <app-auth-layout>
-
   <div class="register-page">
-
-    <h1 class="register-page__title">
-      Crear cuenta
-    </h1>
-
-    <app-register-form />
-
+    <app-app-logo />
+    <h1 class="register-page__title">Crea tu cuenta</h1>
+    <p class="register-page__sub">Empieza a tomar pedidos en minutos.</p>
+    <app-register-form [loading]="cargando()" [error]="error()" (registrar)="registrar($event)" />
+    <p class="register-page__registro">¿Ya tienes cuenta? <app-link-text text="Inicia sesión" link="/login" /></p>
   </div>
-
 </app-auth-layout>
