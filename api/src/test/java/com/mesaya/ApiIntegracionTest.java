@@ -116,6 +116,19 @@ class ApiIntegracionTest {
 	}
 
 	@Test
+	void unaMesaConPedidoActivoNoSeLiberaAMano() throws Exception {
+		long idMesa = buscarIdMesa(2); // ocupada por un pedido de ejemplo
+		mvc.perform(put("/api/mesas/" + idMesa).header("Authorization", "Bearer " + token)
+						.contentType(MediaType.APPLICATION_JSON)
+						.content("{\"numero\":2,\"capacidad\":4,\"estado\":\"DISPONIBLE\"}"))
+				.andExpect(status().isBadRequest());
+		mvc.perform(put("/api/mesas/" + buscarIdMesa(3)).header("Authorization", "Bearer " + token)
+						.contentType(MediaType.APPLICATION_JSON)
+						.content("{\"numero\":3,\"capacidad\":4,\"estado\":\"OCUPADA\"}"))
+				.andExpect(status().isBadRequest());
+	}
+
+	@Test
 	void dashboardResumeLosDatosDeEjemplo() throws Exception {
 		mvc.perform(get("/api/dashboard/resumen").header("Authorization", "Bearer " + token))
 				.andExpect(status().isOk())

@@ -43,6 +43,8 @@ public class MesaServiceImpl implements IMesaService {
 	public MesaResponseDTO crear(MesaRequestDTO dto) {
 		if (mesaRepository.existsByNumero(dto.getNumero()))
 			throw new BusinessException("Ya existe una mesa con el número " + dto.getNumero());
+		if (dto.getEstado() == EstadoMesa.OCUPADA)
+			throw new BusinessException("Una mesa queda ocupada al crearle un pedido.");
 		Mesa m = new Mesa();
 		mapear(dto, m);
 		return toDTO(mesaRepository.save(m));
@@ -54,8 +56,19 @@ public class MesaServiceImpl implements IMesaService {
 		Mesa m = buscar(id);
 		if (mesaRepository.existsByNumeroAndIdMesaNot(dto.getNumero(), id))
 			throw new BusinessException("Ya existe otra mesa con el número " + dto.getNumero());
+		validarEstado(m.getEstado(), dto.getEstado(), id);
 		mapear(dto, m);
 		return toDTO(mesaRepository.save(m));
+	}
+
+	/** El estado OCUPADA lo manejan los pedidos: no se pone ni se quita a mano mientras haya uno activo. */
+	private void validarEstado(EstadoMesa actual, EstadoMesa nuevo, Long idMesa) {
+		if (nuevo == null || nuevo == actual) return;
+		if (nuevo == EstadoMesa.OCUPADA)
+			throw new BusinessException("Una mesa queda ocupada al crearle un pedido.");
+		if (actual == EstadoMesa.OCUPADA && pedidoRepository.existsByMesaIdMesaAndEstadoIn(
+				idMesa, List.of(EstadoPedido.CREADA, EstadoPedido.EN_PREPARACION)))
+			throw new BusinessException("La mesa tiene un pedido activo. Entrégalo o elimínalo para liberarla.");
 	}
 
 	@Override
