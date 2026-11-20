@@ -2,9 +2,7 @@
 
 Panel web para la operación diaria de un restaurante: mesas, carta, clientes y pedidos, desde que se toma la comanda hasta que se entrega.
 
-**Demo:** https://eliasgdev.github.io/mesaya/ — entra con la cuenta de demostración (`demo@mesaya.co` / `MesaYa2026`) o crea una cuenta.
-
-> La API corre en el plan gratuito de Render: si lleva un rato sin uso, la primera carga tarda alrededor de un minuto mientras se enciende. Los datos de la demo se reinician con cada despliegue.
+Proyecto de código abierto para correr en local (ver más abajo). Al arrancar crea un restaurante de ejemplo y la cuenta `demo@mesaya.co` / `MesaYa2026`.
 
 ![Panel con el resumen del día y los pedidos en curso](docs/capturas/panel.png)
 
@@ -28,7 +26,7 @@ Panel web para la operación diaria de un restaurante: mesas, carta, clientes y 
 | Base de datos | SQLite por defecto; PostgreSQL con el perfil `postgres` |
 | Web | Angular 21 con componentes standalone y signals, diseño atómico (átomos, moléculas, organismos) |
 | Calidad | Pruebas de integración con MockMvc, pruebas unitarias con Vitest, CI en GitHub Actions |
-| Despliegue | API en Docker sobre Render · web estática en GitHub Pages |
+| Contenedor | Dockerfile multi-etapa para la API |
 
 ### Arquitectura de la API
 
@@ -95,4 +93,4 @@ cd web && npx ng test --watch=false
 
 ## Origen
 
-MesaYa empezó como proyecto final de la materia DSI3 en la Universidad El Bosque (2026-1): el backend en Spring Boot y la maqueta de pantallas en Angular con diseño atómico. Después del semestre lo terminé: autenticación con JWT, conexión de todas las pantallas a la API, reglas de negocio, pruebas y despliegue.
+MesaYa empezó como proyecto final de la materia DSI3 en la Universidad El Bosque (2026-1): el backend en Spring Boot y la maqueta de pantallas en Angular con diseño atómico. Después del semestre lo terminé: autenticación con JWT, conexión de todas las pantallas a la API, reglas de negocio y pruebas.
