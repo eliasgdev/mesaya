@@ -1,0 +1,23 @@
+<form class="product-form">
+
+  <app-input-field
+    label="Nombre"
+    placeholder="Hamburguesa"
+  />
+
+  <app-input-number
+    label="Precio"
+    placeholder="20000"
+  />
+
+  <app-select-field
+    label="Categoría"
+    [options]="categories"
+  />
+
+  <app-button
+    text="Guardar producto"
+    type="primary"
+  />
+
+</form>

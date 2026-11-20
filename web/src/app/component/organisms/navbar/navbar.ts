@@ -1,0 +1,17 @@
+// =====================================
+// ORGANISM — NAVBAR
+// =====================================
+
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-navbar',
+  standalone: true,
+  templateUrl: './navbar.html',
+  styleUrl: './navbar.css'
+})
+export class NavbarComponent {
+
+  @Input() title = '';
+
+}

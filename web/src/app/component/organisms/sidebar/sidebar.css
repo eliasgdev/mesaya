@@ -1,0 +1,26 @@
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+
+  background: #111827;
+
+  padding: 30px;
+
+  color: white;
+}
+
+.sidebar__logo {
+  margin-bottom: 40px;
+}
+
+.sidebar__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar__link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}

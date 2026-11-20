@@ -1,0 +1,16 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 30px;
+}
+
+.navbar__title {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.navbar__user {
+  font-weight: 600;
+}

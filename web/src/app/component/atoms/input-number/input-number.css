@@ -1,0 +1,15 @@
+.input-number {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-number__label {
+  font-weight: 600;
+}
+
+.input-number__input {
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 12px;
+}

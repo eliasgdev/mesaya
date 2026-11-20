@@ -1,0 +1,15 @@
+.stats-card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+}
+
+.stats-card__title {
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.stats-card__value {
+  font-size: 32px;
+  font-weight: bold;
+}

@@ -1,0 +1,16 @@
+.products-table {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.products-table__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.products-table__table th,
+.products-table__table td {
+  padding: 16px;
+  text-align: left;
+}

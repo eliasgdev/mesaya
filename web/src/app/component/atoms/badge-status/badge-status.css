@@ -1,0 +1,26 @@
+.badge-status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.badge-status--activo {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-status--inactivo {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.badge-status--ocupada {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.badge-status--disponible {
+  background: #dcfce7;
+  color: #166534;
+}

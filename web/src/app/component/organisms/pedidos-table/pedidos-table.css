@@ -1,0 +1,15 @@
+.pedidos-table {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.pedidos-table__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pedidos-table__table th,
+.pedidos-table__table td {
+  padding: 16px;
+}

@@ -1,0 +1,16 @@
+.order-item {
+  display: flex;
+  justify-content: space-between;
+
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.order-item__product {
+  font-weight: 600;
+}
+
+.order-item__quantity {
+  color: #6b7280;
+}

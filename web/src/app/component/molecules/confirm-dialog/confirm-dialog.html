@@ -1,0 +1,31 @@
+<div class="confirm-dialog">
+
+  <div class="confirm-dialog__header">
+
+    <h2 class="confirm-dialog__title">
+      {{ title }}
+    </h2>
+
+    <app-modal-close />
+
+  </div>
+
+  <p class="confirm-dialog__message">
+    {{ message }}
+  </p>
+
+  <div class="confirm-dialog__actions">
+
+    <app-button
+      text="Cancelar"
+      type="secondary"
+    />
+
+    <app-button
+      text="Confirmar"
+      type="danger"
+    />
+
+  </div>
+
+</div>

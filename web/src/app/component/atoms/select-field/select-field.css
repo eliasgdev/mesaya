@@ -1,0 +1,15 @@
+.select-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.select-field__label {
+  font-weight: 600;
+}
+
+.select-field__select {
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 12px;
+}

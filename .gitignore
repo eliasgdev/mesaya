@@ -1,0 +1,12 @@
+# Java
+api/target/
+*.db
+# Node / Angular
+web/node_modules/
+web/dist/
+web/.angular/
+# Entorno
+.env
+.env.*
+.vscode/
+.idea/

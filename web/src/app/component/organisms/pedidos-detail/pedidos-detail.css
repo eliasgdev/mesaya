@@ -1,0 +1,15 @@
+.pedidos-detail {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+}
+
+.pedidos-detail__title {
+  margin-bottom: 20px;
+}
+
+.pedidos-detail__items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

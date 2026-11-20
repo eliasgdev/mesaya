@@ -1,0 +1,28 @@
+.button {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.button--primary {
+  background: #ff7a00;
+  color: white;
+}
+
+.button--secondary {
+  background: #5b2cff;
+  color: white;
+}
+
+.button--danger {
+  background: #ef4444;
+  color: white;
+}
+
+.button--success {
+  background: #10b981;
+  color: white;
+}

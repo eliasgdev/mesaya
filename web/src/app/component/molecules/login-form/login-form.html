@@ -1,0 +1,22 @@
+<form
+  class="login-form"
+  (ngSubmit)="onSubmit()"
+>
+
+  <app-input-field
+    label="Correo"
+    placeholder="correo@gmail.com"
+  />
+
+  <app-input-field
+    label="Contraseña"
+    placeholder="********"
+    type="password"
+  />
+
+  <app-button
+    text="Ingresar"
+    type="primary"
+  />
+
+</form>

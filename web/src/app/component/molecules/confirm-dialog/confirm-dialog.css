@@ -1,0 +1,29 @@
+.confirm-dialog {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 400px;
+}
+
+.confirm-dialog__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+.confirm-dialog__title {
+  font-size: 24px;
+}
+
+.confirm-dialog__message {
+  margin-bottom: 30px;
+  color: #6b7280;
+}
+
+.confirm-dialog__actions {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+}

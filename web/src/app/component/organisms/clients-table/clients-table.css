@@ -1,0 +1,15 @@
+.clients-table {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.clients-table__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.clients-table__table th,
+.clients-table__table td {
+  padding: 16px;
+}
